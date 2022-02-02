@@ -1,0 +1,15 @@
+{
+  "name": "jdb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "jdb.js",
+  "bin": {
+    "j": "cli-tool"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
