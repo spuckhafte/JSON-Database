@@ -40,7 +40,7 @@ function create(token, query1, query2, query3) {
                         console.log('Relational group already exists')
                     }
 
-                    let path2 = './' + dbDirectory + '/' + query1 + '/config.json' // add a config file to it, to separate
+                    let path2 = './' + dbDirectory + '/' + query1 + '/config.json' // add a config file to it, to distinguish between r/i groups
                     let config = {
                         'type': 'rGroup'
                     }
