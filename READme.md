@@ -6,6 +6,9 @@ I am creating it as an educational project <br>
 ![alt text](https://cdn.discordapp.com/attachments/884143949911031908/938518207541674064/unknown.png)
 ![alt text](https://cdn.discordapp.com/attachments/884143949911031908/938518767565172796/unknown.png)
 
+**You can contact me if would like to work on the CLI or Scripting part**<br>
+**Discord: spuckhafte#7109**
+
 ## Keywords:
 'Db': 'database',<br>
 'rGroup': 'relational group',<br>
