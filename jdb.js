@@ -26,7 +26,7 @@ function create(token, query1, query2, query3) {
                 fs.mkdirSync(path)
                 console.log('Database created successfully')
             } else {
-                console.error('Database already exists')
+                console.error('[Err]: Database already exists')
             }
         }
 
@@ -41,7 +41,7 @@ function create(token, query1, query2, query3) {
                     fs.mkdirSync(path)
                     console.log('Group created successfully')
                 } else {
-                    console.error('Group already exists')
+                    console.error('[Err]: Group already exists')
                 }
 
                 let path2 = './' + dbDirectory + '/' + query1 + '/__config.json' // add a config file to it, to separate
@@ -52,7 +52,7 @@ function create(token, query1, query2, query3) {
                     token == 'rGroup' ? rConfig : iConfig // write config file
                 ))
             } else {
-                console.error('No database found')
+                console.error('[Err]: No database found')
             }
         }
 
@@ -148,7 +148,7 @@ function __checkIfDatabaseExists() {
 function __createElementsInRGroupsAccordingToAlreadyExistingElements(dbDirectory, existingElements, query1) {
     let __existingEl = existingElements[0]
     // get the keys of the existing element
-    let __existingElKeys = Object.keys(JSON.parse(fs.readFileSync('./' + dbDirectory + '/' + query1 + '/' + existingEl)))
+    let __existingElKeys = Object.keys(JSON.parse(fs.readFileSync('./' + dbDirectory + '/' + query1 + '/' + __existingEl)))
     // remove the first key (0)
     __existingElKeys.shift()
     // create element with a unique key
