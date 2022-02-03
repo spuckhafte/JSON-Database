@@ -86,7 +86,7 @@ function create(token, query1, query2, query3) {
                                     }
                                 } else {
                                     // create a new element with a unique key based on previous elements
-                                    element = __createElementsInRGroupsAccordingToAlreadyExisting(dbDirectory, existingElements, query1)
+                                    element = __createElementsInRGroupsAccordingToAlreadyExistingElements(dbDirectory, existingElements, query1)
                                 }
 
                                 // check if the element already exists and create a new one if it does
@@ -145,22 +145,22 @@ function __checkIfDatabaseExists() {
     }
 }
 
-function __createElementsInRGroupsAccordingToAlreadyExisting(dbDirectory, existingElements, query1) {
-    let existingEl = existingElements[0]
+function __createElementsInRGroupsAccordingToAlreadyExistingElements(dbDirectory, existingElements, query1) {
+    let __existingEl = existingElements[0]
     // get the keys of the existing element
-    let existingElKeys = Object.keys(JSON.parse(fs.readFileSync('./' + dbDirectory + '/' + query1 + '/' + existingEl)))
+    let __existingElKeys = Object.keys(JSON.parse(fs.readFileSync('./' + dbDirectory + '/' + query1 + '/' + existingEl)))
     // remove the first key (0)
-    existingElKeys.shift()
+    __existingElKeys.shift()
     // create element with a unique key
-    let newElement = {
+    let __newElement = {
         0: `${uuidv4()}`
     }
     // create more keys for the element from the existing keys
-    existingElKeys.forEach(_key => {
-        newElement[_key] = null
+    __existingElKeys.forEach(_key => {
+        __newElement[_key] = null
     })
 
-    return newElement
+    return __newElement
 }
 
 
