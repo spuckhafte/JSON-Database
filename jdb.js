@@ -195,3 +195,5 @@ function __rGroupIsAuthentic(dbDir, rGroup) {
 // create('element', 'workers', 'names')
 // create('element', 'office-hardware', 'hardwares')
 // create('element', 'clients', 'address')
+
+module.exports = { create }
