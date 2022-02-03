@@ -1,6 +1,9 @@
 # JSON Database - Jdb
 I am creating it as an educational project <br>
-*under development*
+*under development*<br>
+<br>
+Example:
+![alt text](https://cdn.discordapp.com/attachments/884143949911031908/938684481215266836/Example.png)
 
 # Idea:
 ![alt text](https://cdn.discordapp.com/attachments/884143949911031908/938518207541674064/unknown.png)
