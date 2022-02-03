@@ -59,44 +59,72 @@ function create(token, query1, query2, query3) {
         // creating an element
         if (token === 'element') {
             let dbDirectory = __checkIfDatabaseExists() // checking if database exists
-            if (dbDirectory !== null) {
+            if (dbDirectory !== null && dbDirectory !== undefined) {
                 // here query1 will be the group in which element needs to be created
                 // query2 will be the name of the element
 
                 // check if the group exists
-                let checkPathOfElement = './' + dbDirectory + '/' + query1
-                if (fs.existsSync(checkPathOfElement)) {
+                let checkPathOfGroup = './' + dbDirectory + '/' + query1
+                if (fs.existsSync(checkPathOfGroup)) {
                     let path = './' + dbDirectory + '/' + query1 + '/' + query2 + '.json' // create path for the new element in respective group
-                    // get the config file of the group
-                    let config = JSON.parse(fs.readFileSync('./' + dbDirectory + '/' + query1 + '/__config.json'))
 
-                    let element = {} // create an empty element which will be written to the file and edited below
+                    if (!fs.existsSync(path)) { // element should not already exist
+                        // get the config file of the group
+                        let config = JSON.parse(fs.readFileSync('./' + dbDirectory + '/' + query1 + '/__config.json'))
 
-                    // check type of group
-                    if (config['type'] === 'rGroup') {
-                        // get name of a any element in the group (if any)
-                        let existingElements = fs.readdirSync('./' + dbDirectory + '/' + query1)
-                        if (existingElements.length === 0) { // if no element exists
-                            element = {
-                                0: `${uuidv4()}` // create a new element with a unique key
+                        let element = {} // create an empty element which will be written to the file and edited below
+
+                        // check type of group
+                        if (config['type'] === 'rGroup') { // relational group
+                            let authenticity = __rGroupIsAuthentic(dbDirectory, query1) // check if all elements have the same keys
+                            if (authenticity) { // if all elements have the same keys
+                                // get name of any element in the group (if any)
+                                let existingElements = fs.readdirSync('./' + dbDirectory + '/' + query1)
+                                if (existingElements.length === 0) { // if no element exists
+                                    element = {
+                                        0: `${uuidv4()}` // create a new element with a unique key
+                                    }
+                                } else {
+                                    // create a new element with a unique key based on previous elements
+                                    element = __createElementsInRGroupsAccordingToAlreadyExisting(dbDirectory, existingElements, query1)
+                                }
+
+                                // check if the element already exists and create a new one if it does
+                                if (!fs.existsSync(path)) {
+                                    fs.writeFileSync(path, JSON.stringify(element, null, 4)) // write the element to folder
+                                    console.log('Element created successfully')
+                                } else {
+                                    console.error('[Err]: Element already exists')
+                                }
+                            } else {
+                                console.error('[Err]: Elements in the group do not have the same keys, rGroup lost authenticity')
                             }
-                        } else {
-                            // create a new element with a unique key based on previous elements
-                            element = __createElementsInRGroupsAccordingToAlreadyExisting(dbDirectory, existingElements, query1)
-                        }
 
-                        // check if the element already exists and create a new one if it does
-                        if (!fs.existsSync(path)) {
-                            // create new file path
-                            fs.writeFileSync(path, JSON.stringify(element, null, 4)) // write the element to the file
-                            console.log('Element created successfully')
-                        } else {
-                            console.error('Element already exists')
+                        } else { // individual group
+
+                            //get name of any element in the group (if any)
+                            let existingElements = fs.readdirSync('./' + dbDirectory + '/' + query1)
+                            existingElements.shift() // remove the first element (0)
+                            if (existingElements.length === 0) { // if no element exists
+                                element = {
+                                    "id": uuidv4()
+                                }
+                                // write the element to folder
+                                fs.writeFileSync(path, JSON.stringify(element, null, 4))
+                                console.log('Element created successfully')
+                            } else {
+                                console.error('[Err]: An element already exists, iGroups can only have one element')
+                            }
+
                         }
+                    } else {
+                        console.error('[Err]: Element already exists')
                     }
                 } else {
-                    console.error('Group does not exist')
+                    console.error('[Err]: Group does not exist')
                 }
+            } else {
+                console.error('[Err]: No database found')
             }
         }
 
@@ -135,8 +163,35 @@ function __createElementsInRGroupsAccordingToAlreadyExisting(dbDirectory, existi
     return newElement
 }
 
+
+function __rGroupIsAuthentic(dbDir, rGroup) {
+    // in relational groups, all elements should have the same keys
+    // check if all elements have the same keys
+    let __files = fs.readdirSync('./' + dbDir + '/' + rGroup) // get list of all files
+    __files = __files.filter(_file => _file !== '__config.json') // remove config file
+    // check if all files have the same keys
+    let __keys = [] // this array will contains arrays of keys of all elements
+    __files.forEach(__file => {
+        __keys.push(Object.keys(JSON.parse(fs.readFileSync('./' + dbDir + '/' + rGroup + '/' + __file)))) // get keys of each element
+    });
+
+    // check if all keys are the same
+    let __keysAreSame = true
+    for (let i = 0; i < __keys.length; i++) { // iterate through all key arrays
+        if (JSON.stringify(__keys[i]) !== JSON.stringify(__keys[0])) {
+            __keysAreSame = false
+            break
+        }
+    }
+    return __keysAreSame
+}
+
 // create('Db', 'database')
 // create('rGroup', 'workers')
 // create('rGroup', 'clients')
-// create('iGroup', 'office hardware')
+// create('iGroup', 'office-hardware')
+
 // create('element', 'clients', 'names')
+// create('element', 'workers', 'names')
+// create('element', 'office-hardware', 'hardwares')
+// create('element', 'clients', 'address')
