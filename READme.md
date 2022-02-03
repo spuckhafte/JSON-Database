@@ -7,7 +7,7 @@ Example:
 
 # Idea:
 ![alt text](https://cdn.discordapp.com/attachments/884143949911031908/938834860724879440/Screenshot_2022-02-03_220235.png)<br>
-**Db - refer to a database**
+**Db - refer to a database**<br>
 ![alt text](https://cdn.discordapp.com/attachments/884143949911031908/938834883822903346/Screenshot_2022-02-03_220301.png)
 ![alt text](https://cdn.discordapp.com/attachments/884143949911031908/938834916714618890/Screenshot_2022-02-03_220325.png)
 ![alt text](https://cdn.discordapp.com/attachments/884143949911031908/938834942748672090/Screenshot_2022-02-03_220343.png)
