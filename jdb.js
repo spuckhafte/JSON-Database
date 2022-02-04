@@ -9,31 +9,22 @@ const tokens = {
     'Db': 'database',
     'rGroup': 'relational group',
     'iGroup': 'individual group',
-    'element': 'JSON object in r/i groups',
-    'entry': 'serial no. (key) in an element of rGroup',
-    'prime': 'key of iGroup element',
-    'moral': 'value of an element',
-    'create': 'function to create a new query'
+    'element': 'JSON object in r/i groups'
 }
-
-// make evrery console.log green
 
 
 create('Db', 'database')
-create('rGroup', 'workers')
-create('rGroup', 'clients')
-create('iGroup', 'office-hardware')
-
-create('element', 'clients', 'names')
-create('element', 'workers', 'names')
-create('element', 'clients', 'address')
+create('rGroup', 'Users')
+create('iGroup', 'Office')
+create('element', 'Users', 'name')
+create('element', 'Users', 'id')
+create('element', 'Office', 'hardwares')
 
 let data = {
-    'names': 'John Doe',
-    'address': '123, ABC Street, XYZ City'
+    'name': 'John',
+    'id': '12345'
 }
-
-assign('moral', 'clients', data)
+assign('moral', 'Users', data)
 
 
 module.exports = { create, assign, getR }

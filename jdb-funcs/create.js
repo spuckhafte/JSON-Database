@@ -1,3 +1,4 @@
+const { group } = require('console')
 const fs = require('fs')
 const { v4: uuidv4 } = require('uuid')
 
@@ -39,18 +40,17 @@ function create(token, query1, query2) {
 
                 if (!fs.existsSync(path)) { // Group should not already exist
                     fs.mkdirSync(path)
+                    let path2 = './' + dbDirectory + '/' + query1 + '/__config.json' // add a config file to it, to separate
+                    let rConfig = { 'type': 'rGroup', 'elements': '0' } // respective to the type of group
+                    let iConfig = { 'type': 'iGroup', 'elements': '0' } // respective to the type of group
+
+                    fs.writeFileSync(path2, JSON.stringify(
+                        token == 'rGroup' ? rConfig : iConfig // write config file
+                    ))
                     greenConsole('Group created successfully')
                 } else {
                     console.error('\x1b[31m[Err]:\x1b[0m Group already exists')
                 }
-
-                let path2 = './' + dbDirectory + '/' + query1 + '/__config.json' // add a config file to it, to separate
-                let rConfig = { 'type': 'rGroup', 'elements': '0' } // respective to the type of group
-                let iConfig = { 'type': 'iGroup', 'elements': '0' } // respective to the type of group
-
-                fs.writeFileSync(path2, JSON.stringify(
-                    token == 'rGroup' ? rConfig : iConfig // write config file
-                ))
             } else {
                 console.error('\x1b[31m[Err]:\x1b[0m No database found')
             }
@@ -80,6 +80,7 @@ function create(token, query1, query2) {
                             if (authenticity) { // if all elements have the same keys
                                 // get name of any element in the group (if any)
                                 let existingElements = fs.readdirSync('./' + dbDirectory + '/' + query1)
+                                existingElements = existingElements.filter(_element => _element !== '__config.json')
                                 if (existingElements.length === 0) { // if no element exists
                                     element = {
                                         0: `${uuidv4()}` // create a new element with a unique key
@@ -105,9 +106,9 @@ function create(token, query1, query2) {
                         } else { // individual group
 
                             let existingElements = fs.readdirSync('./' + dbDirectory + '/' + query1)
-                            existingElements.shift() // remove the first element (0)
+                            existingElements == existingElements.filter(_element => _element !== '__config.json')
                             element = {
-                                "id": uuidv4()
+                                0: uuidv4()
                             }
                             // write the element to folder if it does not exist
                             if (!fs.existsSync(path)) {
@@ -124,6 +125,7 @@ function create(token, query1, query2) {
                         console.error('\x1b[31m[Err]:\x1b[0m Element already exists')
                     }
                 } else {
+                    console.log(group)
                     console.error('\x1b[31m[Err]:\x1b[0m Group does not exist')
                 }
             } else {

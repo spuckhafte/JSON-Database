@@ -40,7 +40,7 @@ function assign(token, group, moralObject) {
                                     let elementPath = './' + dbDirectory + '/' + group + '/' + key + '.json' // path of element to be updated
                                     let element = JSON.parse(fs.readFileSync(elementPath))
                                     element[lengthOfFirstElement] = moralObject[key] // put value of moralObject to element
-                                    fs.writeFileSync(elementPath, JSON.stringify(element, null, 4))
+                                    fs.writeFileSync(elementPath, JSON.stringify(element, null, 4)) // write the updated element to file
                                     return lengthOfFirstElement // return the entry of the assigned morals
                                 })
                                 greenConsole('Morals assigned successfully')
