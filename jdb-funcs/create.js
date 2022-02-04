@@ -24,7 +24,7 @@ function create(token, query1, query2) {
             // check if the folder already exists
             if (!fs.existsSync(path)) {
                 fs.mkdirSync(path)
-                console.log('Database created successfully')
+                greenConsole('Database created successfully')
             } else {
                 console.error('\x1b[31m[Err]:\x1b[0m Database already exists')
             }
@@ -39,7 +39,7 @@ function create(token, query1, query2) {
 
                 if (!fs.existsSync(path)) { // Group should not already exist
                     fs.mkdirSync(path)
-                    console.log('Group created successfully')
+                    greenConsole('Group created successfully')
                 } else {
                     console.error('\x1b[31m[Err]:\x1b[0m Group already exists')
                 }
@@ -94,7 +94,7 @@ function create(token, query1, query2) {
                                     config['elements'] = parseInt(config['elements']) + 1 // increment the number of elements in the group
                                     fs.writeFileSync('./' + dbDirectory + '/' + query1 + '/__config.json', JSON.stringify(config)) // write the config file
                                     fs.writeFileSync(path, JSON.stringify(element, null, 4)) // write the element to folder
-                                    console.log('Element created successfully')
+                                    greenConsole('Element created successfully')
                                 } else {
                                     console.error('\x1b[31m[Err]:\x1b[0m Element already exists')
                                 }
@@ -114,7 +114,7 @@ function create(token, query1, query2) {
                                 config['elements'] = parseInt(config['elements']) + 1 // increment the number of elements in the group
                                 fs.writeFileSync('./' + dbDirectory + '/' + query1 + '/__config.json', JSON.stringify(config)) // write the config file
                                 fs.writeFileSync(path, JSON.stringify(element, null, 4))
-                                console.log('Element created successfully')
+                                greenConsole('Element created successfully')
                             } else {
                                 // make the [Err] color in console red
                                 console.error('\x1b[31m[Err]:\x1b[0m Element already exists')
@@ -132,6 +132,10 @@ function create(token, query1, query2) {
         }
 
     }
+}
+
+function greenConsole(text) {
+    console.log('\x1b[32m' + text + '\x1b[0m')
 }
 
 function __checkIfDatabaseExists() {

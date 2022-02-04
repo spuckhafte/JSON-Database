@@ -43,7 +43,7 @@ function assign(token, group, moralObject) {
                                     fs.writeFileSync(elementPath, JSON.stringify(element, null, 4))
                                     return lengthOfFirstElement // return the entry of the assigned morals
                                 })
-                                console.log('Morals assigned successfully')
+                                greenConsole('Morals assigned successfully')
                             } else {
                                 console.error('\x1b[31m[Err]:\x1b[0m Some keys of moral are not present in all elements of group')
                             }
@@ -68,3 +68,7 @@ function assign(token, group, moralObject) {
 }
 
 module.exports = { assign }
+
+function greenConsole(text) {
+    console.log('\x1b[32m' + text + '\x1b[0m')
+}

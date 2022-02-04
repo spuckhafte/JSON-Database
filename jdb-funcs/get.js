@@ -32,4 +32,8 @@ function getR(group, key) {
     }
 }
 
+function greenConsole(text) {
+    console.log('\x1b[32m' + text + '\x1b[0m')
+}
+
 module.exports = { getR }

@@ -16,24 +16,24 @@ const tokens = {
     'create': 'function to create a new query'
 }
 
+// make evrery console.log green
 
 
-// create('Db', 'database')
-// create('rGroup', 'workers')
-// create('rGroup', 'clients')
-// create('iGroup', 'office-hardware')
+create('Db', 'database')
+create('rGroup', 'workers')
+create('rGroup', 'clients')
+create('iGroup', 'office-hardware')
 
-// create('element', 'clients', 'names')
-// create('element', 'workers', 'names')
-// create('element', 'clients', 'address')
+create('element', 'clients', 'names')
+create('element', 'workers', 'names')
+create('element', 'clients', 'address')
 
-// let data = {
-//     'names': 'John Doe',
-//     'address': '123, ABC Street, XYZ City'
-// }
+let data = {
+    'names': 'John Doe',
+    'address': '123, ABC Street, XYZ City'
+}
 
-// assign('moral', 'clients', data)
-// console.log(getR('clients', 1))
+assign('moral', 'clients', data)
 
 
 module.exports = { create, assign, getR }
