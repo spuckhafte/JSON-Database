@@ -22,13 +22,13 @@ function getR(group, key) {
                 });
                 return values
             } else {
-                console.error('[Err]: Key must be greater than 0')
+                console.error('\x1b[31m[Err]:\x1b[0m Key must be greater than 0')
             }
         } else {
-            console.error('[Err]: rGroup is not authentic');
+            console.error('\x1b[31m[Err]:\x1b[0m rGroup is not authentic');
         }
     } else {
-        console.error('[Err]: No database found')
+        console.error('\x1b[31m[Err]:\x1b[0m No database found')
     }
 }
 

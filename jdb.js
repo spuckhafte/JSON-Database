@@ -33,7 +33,7 @@ const tokens = {
 // }
 
 // assign('moral', 'clients', data)
-console.log(getR('clients', 1))
+// console.log(getR('clients', 1))
 
 
 module.exports = { create, assign, getR }

@@ -45,25 +45,25 @@ function assign(token, group, moralObject) {
                                 })
                                 console.log('Morals assigned successfully')
                             } else {
-                                console.error('[Err]: Some keys of moral are not present in all elements of group')
+                                console.error('\x1b[31m[Err]:\x1b[0m Some keys of moral are not present in all elements of group')
                             }
                         } else {
-                            console.error('[Err]: Moral is not an object')
+                            console.error('\x1b[31m[Err]:\x1b[0m Moral is not an object')
                         }
                     } else {
-                        console.error('[Err]: Group is not authentic')
+                        console.error('\x1b[31m[Err]:\x1b[0m Group is not authentic')
                     }
                 } else {
-                    console.error('[Err]: Group is not a relational group')
+                    console.error('\x1b[31m[Err]:\x1b[0m Group is not a relational group')
                 }
             } else {
-                console.error('[Err]: Group does not exist')
+                console.error('\x1b[31m[Err]:\x1b[0m Group does not exist')
             }
         } else {
-            console.error('[Err]: No database found')
+            console.error('\x1b[31m[Err]:\x1b[0m No database found')
         }
     } else {
-        console.error('[Err]: Token is not valid')
+        console.error('\x1b[31m[Err]:\x1b[0m Token is not valid')
     }
 }
 

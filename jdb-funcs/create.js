@@ -26,7 +26,7 @@ function create(token, query1, query2) {
                 fs.mkdirSync(path)
                 console.log('Database created successfully')
             } else {
-                console.error('[Err]: Database already exists')
+                console.error('\x1b[31m[Err]:\x1b[0m Database already exists')
             }
         }
 
@@ -41,18 +41,18 @@ function create(token, query1, query2) {
                     fs.mkdirSync(path)
                     console.log('Group created successfully')
                 } else {
-                    console.error('[Err]: Group already exists')
+                    console.error('\x1b[31m[Err]:\x1b[0m Group already exists')
                 }
 
                 let path2 = './' + dbDirectory + '/' + query1 + '/__config.json' // add a config file to it, to separate
-                let rConfig = { 'type': 'rGroup' } // respective to the type of group
-                let iConfig = { 'type': 'iGroup' }
+                let rConfig = { 'type': 'rGroup', 'elements': '0' } // respective to the type of group
+                let iConfig = { 'type': 'iGroup', 'elements': '0' } // respective to the type of group
 
                 fs.writeFileSync(path2, JSON.stringify(
                     token == 'rGroup' ? rConfig : iConfig // write config file
                 ))
             } else {
-                console.error('[Err]: No database found')
+                console.error('\x1b[31m[Err]:\x1b[0m No database found')
             }
         }
 
@@ -91,13 +91,15 @@ function create(token, query1, query2) {
 
                                 // check if the element already exists and create a new one if it does
                                 if (!fs.existsSync(path)) {
+                                    config['elements'] = parseInt(config['elements']) + 1 // increment the number of elements in the group
+                                    fs.writeFileSync('./' + dbDirectory + '/' + query1 + '/__config.json', JSON.stringify(config)) // write the config file
                                     fs.writeFileSync(path, JSON.stringify(element, null, 4)) // write the element to folder
                                     console.log('Element created successfully')
                                 } else {
-                                    console.error('[Err]: Element already exists')
+                                    console.error('\x1b[31m[Err]:\x1b[0m Element already exists')
                                 }
                             } else {
-                                console.error('[Err]: Elements in the group do not have the same keys, rGroup lost authenticity')
+                                console.error('\x1b[31m[Err]:\x1b[0m Elements in the group do not have the same keys, rGroup lost authenticity')
                             }
 
                         } else { // individual group
@@ -109,20 +111,23 @@ function create(token, query1, query2) {
                             }
                             // write the element to folder if it does not exist
                             if (!fs.existsSync(path)) {
+                                config['elements'] = parseInt(config['elements']) + 1 // increment the number of elements in the group
+                                fs.writeFileSync('./' + dbDirectory + '/' + query1 + '/__config.json', JSON.stringify(config)) // write the config file
                                 fs.writeFileSync(path, JSON.stringify(element, null, 4))
                                 console.log('Element created successfully')
                             } else {
-                                console.error('[Err]: Element already exists')
+                                // make the [Err] color in console red
+                                console.error('\x1b[31m[Err]:\x1b[0m Element already exists')
                             }
                         }
                     } else {
-                        console.error('[Err]: Element already exists')
+                        console.error('\x1b[31m[Err]:\x1b[0m Element already exists')
                     }
                 } else {
-                    console.error('[Err]: Group does not exist')
+                    console.error('\x1b[31m[Err]:\x1b[0m Group does not exist')
                 }
             } else {
-                console.error('[Err]: No database found')
+                console.error('\x1b[31m[Err]:\x1b[0m No database found')
             }
         }
 
