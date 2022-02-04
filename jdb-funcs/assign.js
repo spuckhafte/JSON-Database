@@ -5,7 +5,6 @@ const assignmentTokens = {
 }
 const { __checkIfDatabaseExists } = require('./create.js')
 const { __rGroupIsAuthentic } = require('./create.js')
-const { getR } = require('./get.js')
 const fs = require('fs')
 
 function assign(token, group, moralObject) {
@@ -34,33 +33,17 @@ function assign(token, group, moralObject) {
                             if (keysOfMoral.every(element => allElementsOfGroup.includes(element + '.json'))) {
                                 // find the length of first element in group
                                 let firstElement = JSON.parse(fs.readFileSync(checkGroupPath + '/' + allElementsOfGroup[0]))
-                                let lengthOfFirstElement = Object.keys(firstElement).length
+                                let lengthOfFirstElement = Object.keys(firstElement).length // this value is the entry of new morals in all elements of group
 
-                                // check if moralObject matches any output of getR
-                                let moralsAlreadyExists = false
-                                for (let i = 1; i < lengthOfFirstElement; i++) {
-                                    let recieveMoralObject = getR(group, i)
-                                    console.log(checkUnorderedObjects(recieveMoralObject, moralObject))
-
-                                    // this ineqality is not working
-                                    if (checkUnorderedObjects(recieveMoralObject, moralObject)) {
-                                        moralsAlreadyExists = true
-                                        break
-                                    }
-                                }
-                                if (!moralsAlreadyExists) {
-                                    // put all values of moralObject to elements same as keys
-                                    keysOfMoral.forEach(key => {
-                                        let elementPath = './' + dbDirectory + '/' + group + '/' + key + '.json'
-                                        let element = JSON.parse(fs.readFileSync(elementPath))
-                                        element[lengthOfFirstElement] = moralObject[key]
-                                        fs.writeFileSync(elementPath, JSON.stringify(element, null, 4))
-                                        return lengthOfFirstElement
-                                    })
-                                    console.log('Morals assigned successfully')
-                                } else {
-                                    console.error('[Err]: Morals already exists')
-                                }
+                                // put all values of moralObject to elements same as keys
+                                keysOfMoral.forEach(key => {
+                                    let elementPath = './' + dbDirectory + '/' + group + '/' + key + '.json' // path of element to be updated
+                                    let element = JSON.parse(fs.readFileSync(elementPath))
+                                    element[lengthOfFirstElement] = moralObject[key] // put value of moralObject to element
+                                    fs.writeFileSync(elementPath, JSON.stringify(element, null, 4))
+                                    return lengthOfFirstElement // return the entry of the assigned morals
+                                })
+                                console.log('Morals assigned successfully')
                             } else {
                                 console.error('[Err]: Some keys of moral are not present in all elements of group')
                             }
@@ -82,24 +65,6 @@ function assign(token, group, moralObject) {
     } else {
         console.error('[Err]: Token is not valid')
     }
-}
-
-
-// this function is not working
-function checkUnorderedObjects(obj1, obj2) {
-    // obj1 and obj2 keys and values are unordered but are same, check if they are same
-    let keys1 = Object.keys(obj1)
-    let keys2 = Object.keys(obj2)
-    let values1 = Object.values(obj1)
-    let values2 = Object.values(obj2)
-    let isSame = true
-    for (let i = 0; i < keys1.length; i++) {
-        if (keys1[i] != keys2[i] || values1[i] != values2[i]) {
-            isSame = false
-            break
-        }
-    }
-    return isSame
 }
 
 module.exports = { assign }

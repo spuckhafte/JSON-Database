@@ -25,16 +25,15 @@ const tokens = {
 
 // create('element', 'clients', 'names')
 // create('element', 'workers', 'names')
-// create('element', 'office-hardware', 'hardwares')
 // create('element', 'clients', 'address')
 
-let data = {
-    'names': 'Johnny',
-    'address': '123, ABC Street, XYZ Cityy'
-}
+// let data = {
+//     'names': 'John Doe',
+//     'address': '123, ABC Street, XYZ City'
+// }
 
-assign('moral', 'clients', data)
-// console.log(getR('clients', 1))
+// assign('moral', 'clients', data)
+console.log(getR('clients', 1))
 
 
 module.exports = { create, assign, getR }
