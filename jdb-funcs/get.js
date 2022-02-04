@@ -25,7 +25,7 @@ function getR(group, key) {
                 console.error('[Err]: Key must be greater than 0')
             }
         } else {
-            console.error('[Err]: Group is not authentic');
+            console.error('[Err]: rGroup is not authentic');
         }
     } else {
         console.error('[Err]: No database found')
