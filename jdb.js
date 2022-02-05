@@ -13,18 +13,18 @@ const tokens = {
 }
 
 
-create('Db', 'database')
-create('rGroup', 'Users')
-create('iGroup', 'Office')
-create('element', 'Users', 'name')
-create('element', 'Users', 'id')
-create('element', 'Office', 'hardwares')
+// create('Db', 'database')
+// create('rGroup', 'Users')
+// create('iGroup', 'Office')
+// create('element', 'Users', 'name')
+// create('element', 'Users', 'id')
+// create('element', 'Office', 'hardwares')
 
-let data = {
-    'name': 'John',
-    'id': '12345'
-}
-assign('moral', 'Users', data)
+// let data = {
+//     'name': 'John',
+//     'id': '12345'
+// }
+// assign('moral', 'Users', data)
 
 
 module.exports = { create, assign, getR }

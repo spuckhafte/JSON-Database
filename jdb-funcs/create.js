@@ -125,7 +125,6 @@ function create(token, query1, query2) {
                         console.error('\x1b[31m[Err]:\x1b[0m Element already exists')
                     }
                 } else {
-                    console.log(group)
                     console.error('\x1b[31m[Err]:\x1b[0m Group does not exist')
                 }
             } else {
