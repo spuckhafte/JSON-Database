@@ -36,8 +36,9 @@ function assignR(group, moralObject) {
                         entriesOfMoral = entriesOfMoralNew // set the new array as the old array
 
                         // check if all entries of moral are present in all elements of group
-
-                        if (allElementsOfGroup.every(element => entriesOfMoral.includes(element + '.json'))) {
+                        // entries of moral => element1.json, ...
+                        // all elements of group => element1.json, ...
+                        if (allElementsOfGroup.every(element => entriesOfMoral.includes(element))) {
                             // find the length of first element in group
                             let firstElement = JSON.parse(fs.readFileSync(checkGroupPath + '/' + allElementsOfGroup[0]))
                             let lengthOfFirstElement = Object.keys(firstElement).length // this value is the entry of new morals in all elements of group
@@ -46,6 +47,7 @@ function assignR(group, moralObject) {
                             entriesOfMoral.forEach(key => {
                                 let elementPath = './' + dbDirectory + '/' + group + '/' + key // path of element to be updated
                                 let element = JSON.parse(fs.readFileSync(elementPath))
+                                key = key.slice(0, -5) // remove .json from key
                                 element[lengthOfFirstElement] = moralObject[key] // put value of moralObject to element
                                 fs.writeFileSync(elementPath, JSON.stringify(element, null, 4)) // write the updated element to file
                             })
@@ -78,8 +80,8 @@ function assignR(group, moralObject) {
                                     element[lengthOfFirstElement] = moralObject[key] // put value of moralObject to element
                                     fs.writeFileSync(elementPath, JSON.stringify(element, null, 4)) // write the updated element to file
                                 })
-                                return lengthOfFirstElement // return the entry of the assigned morals
                                 greenConsole('R-Morals assigned successfully')
+                                return lengthOfFirstElement // return the entry of the assigned morals
                             } else {
                                 console.error('\x1b[31m[Err]:\x1b[0m Morals of unkown entries')
                             }

@@ -22,12 +22,13 @@ const tokens = {
 // create('element', 'Office', 'hardwares')
 
 // let data = {
-//     'seats': 1
+//     'name': 'Johnb',
+//     'id': '1234653'
 // }
 
-// assignI('Office', 'hardwares', data)
+// assignR('Users', data)
 
 // assignR('Users', data)
-// console.log(getR('Users', 'entry', '1'))
+// console.log(getR('Users', 'moral', ['id', '12346']))
 
 module.exports = { create, assignI, assignR, getR }
