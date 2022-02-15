@@ -67,6 +67,27 @@ function getR(group, param, query) {
     }
 }
 
+//get whole element from an iGroup
+function __getIEl(group, element) {
+    let dbDirectory = __checkIfDatabaseExists();
+    if (dbDirectory !== null && dbDirectory !== undefined) { // db exists?
+        if (fs.existsSync('./' + dbDirectory + '/' + group)) { // group exists?
+            let elements = fs.readdirSync('./' + dbDirectory + '/' + group) // get all elements in the group
+            // check if element exists in the group
+            if (elements.includes(element + '.json')) {
+                let elementObj = JSON.parse(fs.readFileSync('./' + dbDirectory + '/' + group + '/' + element + '.json'))
+                return elementObj
+            } else {
+                console.error('\x1b[31m[Err]:\x1b[0m element does not exist in group')
+            }
+        } else {
+            console.error('\x1b[31m[Err]:\x1b[0m group does not exist')
+        }
+    } else {
+        console.error('\x1b[31m[Err]:\x1b[0m No database found')
+    }
+}
+
 
 // get entry from a relational group by its moral
 function __getEntry(dbDir, group, element, moral) {
@@ -89,4 +110,4 @@ function greenConsole(text) {
     console.log('\x1b[32m' + text + '\x1b[0m')
 }
 
-module.exports = { getR }
+module.exports = { getR, __getIEl }

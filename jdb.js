@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require('uuid')
 const { create } = require('./jdb-funcs/create')
 const { assignR } = require('./jdb-funcs/assign')
 const { assignI } = require('./jdb-funcs/assign')
-const { getR } = require('./jdb-funcs/get')
+const { getR, __getIEl } = require('./jdb-funcs/get')
 
 // keywords for the module
 const tokens = {
@@ -31,4 +31,4 @@ const tokens = {
 // assignR('Users', data)
 // console.log(getR('Users', 'moral', ['id', '12346']))
 
-module.exports = { create, assignI, assignR, getR }
+module.exports = { create, assignI, assignR, getR, __getIEl }
