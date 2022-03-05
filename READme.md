@@ -6,8 +6,6 @@
 I am creating it as an educational project <br>
 *under development*<br>
 <br>
-Example:
-![alt text](https://cdn.discordapp.com/attachments/884143949911031908/938684481215266836/Example.png)
 
 # Idea:
 ![alt text](https://cdn.discordapp.com/attachments/884143949911031908/938834860724879440/Screenshot_2022-02-03_220235.png)<br>
