@@ -2,9 +2,9 @@
 
 ## LATEST VERSION:
 **https://github.com/spuckhafte/jdb-v2**
-<hr></hr>
+<hr>
 I am creating it as an educational project <br>
-*under development*<br>
+under development<br>
 <br>
 
 # Idea:
