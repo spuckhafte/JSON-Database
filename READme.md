@@ -1,6 +1,6 @@
 # JSON Database - Jdb
 
-## LATEST VERSION 
+## LATEST VERSION:
 **https://github.com/spuckhafte/jdb-v2**
 <hr>
 I am creating it as an educational project <br>
